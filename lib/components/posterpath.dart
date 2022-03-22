@@ -13,14 +13,12 @@ class Poster extends StatelessWidget {
     if (posterPath == null) {
       return Image.asset(
         "assets/image/cover.jpeg",
-        scale: 1,
       );
     }
     return CachedNetworkImage(
       imageUrl: API.imageURL + posterPath!,
       placeholder: (context, url) => Image.asset(
         "assets/image/cover.jpeg",
-        scale: 1,
       ),
     );
   }

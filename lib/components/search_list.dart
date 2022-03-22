@@ -1,5 +1,6 @@
 // import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movieapp/components/posterpath.dart';
 import '../models/movies.dart';
 import '../pages/detail_page.dart';
@@ -24,14 +25,18 @@ class _SearchListState extends State<SearchList> {
         Movie m = widget.list[index];
         return InkWell(
           onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => DetailPage(
-                                  movie: m,
-                                  heroTag: "${m.id}Search",
-                                ))));
-                  },
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: ((context) => DetailPage(
+            //               movie: m,
+            //               heroTag: "${m.id}Search",
+            //             ))));
+            Get.to(() => DetailPage(
+                  movie: m,
+                  heroTag: "${m.id}Search",
+                ));
+          },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -39,8 +44,8 @@ class _SearchListState extends State<SearchList> {
                 SizedBox(
                   height: 180,
                   child: Hero(
-                                tag: "${m.id}Search",
-                                child: Poster(posterPath: m.posterPath)),
+                      tag: "${m.id}Search",
+                      child: Poster(posterPath: m.posterPath)),
                 ),
                 const SizedBox(
                   width: 12,
@@ -49,7 +54,9 @@ class _SearchListState extends State<SearchList> {
                   child: Column(
                     children: [
                       Text(m.title),
-                      m.releaseDate != null ? Text("${m.releaseDate!.year}"): const Text("")
+                      m.releaseDate != null
+                          ? Text("${m.releaseDate!.year}")
+                          : const Text("")
                     ],
                   ),
                 )
@@ -58,6 +65,7 @@ class _SearchListState extends State<SearchList> {
           ),
         );
       },
-      separatorBuilder: (BuildContext context, int index) => const Divider(),);
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
+    );
   } //build
 }//_SearchListState
